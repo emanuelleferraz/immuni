@@ -1,0 +1,40 @@
+# CSI606-2024-02 Sistemas Web I - Proposta de Trabalho Final
+
+## *Aluna(o): Emanuelle Ferraz Lima*
+---
+## Resumo - Immuni
+Este trabalho propõe o desenvolvimento de um sistema web que funcionará como um **Gerenciador de Vacinas**, visando auxiliar no controle e no registro de vacinas tomadas por usuários. O sistema permitirá o acompanhamento das vacinas recomendadas de acordo com a idade, bem como o cadastro de usuários e de vacinas. Seu principal objetivo é oferecer uma ferramenta prática e intuitiva para o gerenciamento do histórico de vacinação, promovendo maior organização e cuidado com a saúde.  
+
+## 1. Tema  
+O trabalho final tem como tema o desenvolvimento de um sistema web que permite o gerenciamento de vacinas.
+
+## 2. Escopo  
+<div align="center">
+
+| **Funcionalidade**                          | **Descrição**                                                                 |
+|---------------------------------------------|-------------------------------------------------------------------------------|
+| Cadastro de Usuários                        | Permitir o registro de informações como nome, idade e dados de contato.      |
+| Registro de Vacinas                         | Registrar as vacinas tomadas pelo usuário.                                   |
+| Consulta de Histórico                       | Consultar e atualizar o histórico de vacinação.                              |
+| Listagem de Vacinas                         | Listar vacinas que devem ser tomadas com base na idade do usuário.                         |
+
+</div>  
+
+## 3. Restrições
+Neste trabalho não serão considerados:  
+- Relatórios contendo o histórico de vacinação e dados do usuário. 
+- Funcionalidades de busca de clínicas ou unidades de saúde para aplicação de vacinas.
+
+## 4. Protótipo  
+Protótipos para as páginas foram elaborados e podem ser encontrados em:
+- **Página Inicial**: com informações sobre o sistema e login do usuário;  
+- **Dashboard**: com informações das vacinas tomadas pelo usuário;
+- **Página de Registro do Usuário**: formulário para cadastro de novos usuários;  
+- **Página de Listagem de Vacinas**: tabela informando as vacinas a serem tomadas.
+
+Link a inserir...
+
+## 5. Referências  
+BRASIL. **Cartilha Vacinas**. Ministério da Saúde. Disponível em: <https://meususdigital.saude.gov.br/publico/cartilha-vacinas>. Acesso em: 26 jan. 2025.
+
+
