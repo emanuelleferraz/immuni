@@ -13,10 +13,10 @@ O trabalho final tem como tema o desenvolvimento de um sistema web que permite o
 
 | **Funcionalidade**                          | **Descrição**                                                                 |
 |---------------------------------------------|-------------------------------------------------------------------------------|
-| Cadastro de Usuários                        | Permitir o registro de informações como nome, idade e dados de contato.      |
-| Registro de Vacinas                         | Registrar as vacinas tomadas pelo usuário.                                   |
-| Consulta de Histórico                       | Consultar e atualizar o histórico de vacinação.                              |
-| Listagem de Vacinas                         | Listar vacinas que devem ser tomadas com base na idade do usuário.                         |
+| **Cadastro de Usuários**                    | Permitir o registro de informações básicas do usuário, como nome, idade, dados de contato (e-mail, telefone) e outros dados relevantes, para criar um perfil individual no sistema.           |
+| **Registro de Vacinas**                     | Registrar as vacinas que o usuário já tomou, incluindo a data e tipo de vacina, garantindo que o histórico de vacinação esteja atualizado.  |
+| **Consulta de Histórico**                   | Permitir que o usuário consulte seu histórico completo de vacinas, com detalhes sobre as datas e tipos de vacinas recebidas, e possibilitar a atualização de registros quando necessário. |
+| **Listagem de Vacinas**                     | Exibir uma lista personalizada de vacinas que o usuário precisa tomar, com base na sua faixa etária e histórico de vacinação, além de fornecer informações sobre os próximos passos e datas recomendadas. |
 
 </div>  
 
