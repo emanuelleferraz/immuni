@@ -32,7 +32,7 @@ Protótipos para as páginas foram elaborados e podem ser encontrados em:
 - **Página de Registro do Usuário**: formulário para cadastro de novos usuários;  
 - **Página de Listagem de Vacinas**: tabela informando as vacinas a serem tomadas.
 
-Você pode encontrar os protótipos de tela na pasta [Protótipos](./Protótipos/) dentro do diretório de Documentação.
+Você pode encontrar os protótipos de tela na pasta [Protótipos](./Protótipos/) dentro do diretório de assets.
 
 ## 5. Referências  
 BRASIL. **Cartilha Vacinas**. Ministério da Saúde. Disponível em: <https://meususdigital.saude.gov.br/publico/cartilha-vacinas>. Acesso em: 26 jan. 2025.
