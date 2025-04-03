@@ -1,36 +1,51 @@
-const User = require('../models/User')
-const Vaccine = require('../models/Vaccine')
-const RecordVaccine = require('../models/RecordVaccine')
+const User = require('../models/User');
+const Vaccine = require('../models/Vaccine');
+const RecordVaccine = require('../models/RecordVaccine');
 
 class DashboardController {
   static async showDashboard(req, res) {
     try {
       const userId = req.session.userId;
 
-      // Busca o usuário com seus registros de vacinas
-      const user = await User.findByPk(userId, {
-        include: {
-          model: RecordVaccine,
-          include: [Vaccine]
-        }
-      });
-
+      // Busca o usuário e seus registros de vacinas
+      const user = await User.findByPk(userId);
+      
       if (!user) {
         req.flash('error_msg', 'Usuário não encontrado!');
         return res.redirect('/login');
       }
 
-      // Calcula o progresso
+      // Busca todas as vacinas registradas pelo usuário
+      const userVaccines = await RecordVaccine.findAll({
+        where: { usuario_id: userId },
+        include: Vaccine,
+        order: [['data_aplicacao', 'DESC']]
+      });
+
+      // Busca todas as vacinas disponíveis no sistema
       const allVaccines = await Vaccine.findAll();
-      const progress = allVaccines.length > 0 
-        ? Math.round((user.RecordVaccines.length / allVaccines.length) * 100)
+
+      // Filtra as vacinas não tomadas
+      const takenVaccineIds = userVaccines.map(v => v.vacina_id);
+      const notTakenVaccines = allVaccines.filter(v => !takenVaccineIds.includes(v.id));
+
+      // Calcula estatísticas para os gráficos
+      const totalVaccines = allVaccines.length;
+      const takenCount = userVaccines.length;
+      const notTakenCount = totalVaccines - takenCount;
+      const progress = totalVaccines > 0 
+        ? Math.round((takenCount / totalVaccines) * 100)
         : 0;
 
       res.render('dashboard/index', {
         title: 'Dashboard',
         user,
-        records: user.RecordVaccines,
-        progress,
+        userVaccines,
+        notTakenVaccines,
+        takenCount,
+        notTakenCount,
+        percentageTaken: progress, 
+        hasRecords: userVaccines.length > 0,
         layout: 'main'
       });
 
@@ -42,4 +57,4 @@ class DashboardController {
   }
 }
 
-module.exports = DashboardController
+module.exports = DashboardController;

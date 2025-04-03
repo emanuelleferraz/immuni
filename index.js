@@ -12,12 +12,46 @@ const app = express()
 // Configuração do Handlebars com helpers
 const hbs = engine({
     helpers: {
+      // Helpers existentes
       lt: (a, b) => a < b,
       add: (a, b) => a + b,
-      eq: (a, b) => a === b,
+      eq: (a, b) => a === b, // Já está definido aqui, não precisa repetir
       json: (obj) => JSON.stringify(obj),
-      // helper increment
-      increment: (value) => parseInt(value) + 1
+      increment: (value) => parseInt(value) + 1,
+      
+      // Formatação das datas
+      formatDate: (date) => {
+        if (!date) return 'Data não informada';
+        return new Date(date).toLocaleDateString('pt-BR');
+      },
+
+      // Helper para subtração
+      subtract: (a, b) => parseInt(a) - parseInt(b),
+      
+      // Helper para cálculo restante
+      remaining: (value) => 100 - parseInt(value),
+      
+      // Helper para formatar data no input type="date" (corrigido)
+      formatDateForInput: (date) => {
+        if (!date) return '';
+        
+        // Se a data já estiver no formato YYYY-MM-DD (string), retorna direto
+        if (typeof date === 'string' && date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          return date;
+        }
+        
+        // Para objetos Date ou strings ISO
+        const d = new Date(date);
+        // Ajusta para o fuso horário local
+        const offset = d.getTimezoneOffset();
+        d.setMinutes(d.getMinutes() + offset);
+        
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}`;
+      }
     },
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
@@ -25,7 +59,7 @@ const hbs = engine({
     },
     defaultLayout: 'main',
     extname: '.handlebars'
-  });
+})
 
 // Template Engine 
 app.engine('handlebars', hbs) 
@@ -77,7 +111,6 @@ app.use((req, res, next) => {
     if(req.session.userId){
         res.locals.session = req.session
     }
-
     next()
 })
 

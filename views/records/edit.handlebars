@@ -1,0 +1,49 @@
+<div class="auth-container">
+    <h1>Editar Registro de Vacinação</h1>
+    <p>Atualize os detalhes da vacinação</p>
+    <form action="/editar-registro/{{record.id}}" method="POST">
+        <!-- Campo de seleção de vacina -->
+        <div class="form-control">
+            <label for="vacina_id">Vacina:</label>
+            <select name="vacina_id" id="vacina_id" required>
+                <option value="">Selecione uma vacina</option>
+                {{#each vaccines}}
+                    <option value="{{this.id}}" {{#eq this.id record.vacina_id}}selected{{/eq}}>
+                        {{this.nome}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+        
+        <!-- Campo de data de aplicação -->
+        <div class="form-control">
+            <label for="data_aplicacao">Data de Aplicação:</label>
+            <input 
+                type="date" 
+                name="data_aplicacao" 
+                id="data_aplicacao" 
+                value="{{formatDateForInput record.data_aplicacao}}" 
+                required
+            >
+        </div>
+        
+        <!-- Campo de dose -->
+        <div class="form-control">
+            <label for="dose">Dose:</label>
+            <input 
+                type="number" 
+                name="dose" 
+                id="dose" 
+                min="1" 
+                value="{{record.dose}}" 
+                placeholder="Número da dose (1, 2, etc.)" 
+                required
+            >
+        </div>
+        
+        <div class="form-actions">
+            <input class="btn btn-save" type="submit" value="Salvar Alterações">
+            <a href="/dashboard" class="btn btn-cancel">Cancelar</a>
+        </div>
+    </form>
+</div>

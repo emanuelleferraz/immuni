@@ -24,7 +24,7 @@ module.exports = class RecordController {
   static async create(req, res) {
     try {
       await RecordVaccine.create({
-        usuario_id: req.session.userid,
+        usuario_id: req.session.userId,
         vacina_id: req.body.vacina_id,
         data_aplicacao: req.body.data_aplicacao,
         dose: req.body.dose
@@ -44,7 +44,7 @@ module.exports = class RecordController {
       const record = await RecordVaccine.findByPk(req.params.id);
       const vaccines = await Vaccine.findAll();
       
-      if (!record || record.usuario_id !== req.session.userid) {
+      if (!record || record.usuario_id !== req.session.userId) {
         req.flash('message', 'Registro não encontrado');
         return res.redirect('/dashboard');
       }
@@ -59,14 +59,18 @@ module.exports = class RecordController {
 
   static async update(req, res) {
     try {
+      // Ajusta a data para evitar problemas de timezone
+      const dataAplicacao = new Date(req.body.data_aplicacao);
+      dataAplicacao.setDate(dataAplicacao.getDate() + 1); // Adiciona um dia para compensar
+      
       await RecordVaccine.update({
         vacina_id: req.body.vacina_id,
-        data_aplicacao: req.body.data_aplicacao,
+        data_aplicacao: dataAplicacao, // Usa a data ajustada
         dose: req.body.dose
       }, {
         where: { 
           id: req.params.id,
-          usuario_id: req.session.userid 
+          usuario_id: req.session.userId 
         }
       });
       
@@ -84,7 +88,7 @@ module.exports = class RecordController {
       await RecordVaccine.destroy({ 
         where: { 
           id: req.params.id,
-          usuario_id: req.session.userid 
+          usuario_id: req.session.userId 
         } 
       });
       

@@ -5,4 +5,4 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 router.get('/dashboard', authMiddleware.checkAuthenticated, DashboardController.showDashboard);
 
-module.exports = router
+module.exports = router;
