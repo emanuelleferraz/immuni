@@ -1,0 +1,140 @@
+* {
+    font-family: Helvetica;
+    margin: 0;
+    padding: 0;
+    /* background-color: #fff; */
+}
+
+body {
+    background: linear-gradient(
+        to right,
+        #330d69,  
+        #30c9cd   
+    );
+    min-height: 100vh; /* Garante que o gradiente cubra toda a altura */
+}
+
+/* Navbar*/
+
+#logo img {
+    height: 35px;
+}
+
+#navbar {
+    padding: 1.2em 1.4em;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #8cf2db;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+#navbar ul li {
+    margin-left: 1em;
+}
+#navbar ul li a {
+    text-decoration: none;
+    transition: 0.5s;
+    font-weight: bold;
+    color: #1a76b4;
+}
+
+#navbar ul li a.btn-nav{
+    padding: 10px 20px; 
+    background-color: #4186ec; 
+    color: white; 
+    border-radius: 5px; 
+    border: 1px solid #1a76b4; 
+    text-align: center; 
+    cursor: pointer; 
+}
+
+/* Container */
+.container {
+    min-height: 60vh;
+    padding: 2em;
+}
+
+/* Landing Page */
+.content {
+    padding: 1.1em 1.4em;
+    margin: 0 auto;
+    margin-bottom: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os botões */
+}
+
+.content img {
+    height: 500px;
+}
+
+.content h1 {
+    font-size: 55px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 1rem; 
+}
+
+.content span {
+    color: #8cf2db;
+}
+
+/* Estilo dos botões */
+.buttons {
+    display: flex;
+    gap: 1em; 
+    margin-top: 1.5em; 
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #30c9cd;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column; 
+        gap: 1em;
+    }
+    .content img {
+        height: auto; 
+        max-height: 300px; 
+    }
+}
+
+/* Footer */
+footer {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #8cf2db;
+    background-color: #fff;
+}
+
+footer span{
+    font-weight: bold;
+    color: #4186ec;
+}
