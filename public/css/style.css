@@ -56,10 +56,32 @@ body {
     cursor: pointer; 
 }
 
+#navbar ul li a.btn-logout {
+    padding: 10px 20px; 
+    background-color: #c01515; 
+    color: white; 
+    border-radius: 5px; 
+    border: 1px solid #c01515; 
+    text-align: center; 
+    cursor: pointer; 
+}
+
 /* Container */
 .container {
     min-height: 60vh;
     padding: 2em;
+}
+
+/* Mensagens do Sistema */
+.message {
+    padding: 1em;
+    color: #004085;
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto 2em;
+    max-width: 60%;
 }
 
 /* Landing Page */
@@ -122,6 +144,73 @@ body {
         height: auto; 
         max-height: 300px; 
     }
+}
+
+/* Login e Cadastro (Padrão de formulário) */
+.auth-container {
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container h1 {
+    margin-bottom: 0.1em;
+    color: #4186ec;
+    padding: 0.3em;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-family: "Helvetica Bold", Helvetica, Arial, sans-serif;
+    font-size: 2em;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.auth-container a {
+    color: #4186ec;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+}
+
+.form-control label {
+    margin-bottom: 0.5em;
+}
+
+.form-control input, .form-control textarea {
+    padding: 13px 16px;
+    border-radius: 5px;
+    background-color: #dddddd;
+    border: none;
+    max-width: 300px;
+    
+}
+
+form input[type='submit'], .btn {
+    margin-top: 0.5em;
+    padding: 10px 12px;
+    background-color: #4186ec;
+    color: #fff;
+    margin-bottom: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
 }
 
 /* Footer */

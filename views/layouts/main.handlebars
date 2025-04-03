@@ -18,12 +18,30 @@
             <li><a href="/">Página Inicial</a></li>
             <li><a href="#about">Sobre</a></li>
             <li><a href="/">Vacinas</a></li>
-            <li><a href="/login" class="btn-nav">Login</a></li>
+            <!-- URLs após autenticação -->
+            {{# if session.userId}}
+                <li><a href="/registrar-vacina">Registrar Vacinação</a></li>
+                <li><a href="/logout" class="btn-logout">Logout</a></li>
+            {{else}}
+                <li><a href="/login" class="btn-nav">Login</a></li>
+            {{/if}}
         </ul>
     </nav>
 
     <div class="container">
         <!-- Mensagens -->
+        {{#if messages.error_msg}}
+            <div class="message error">
+                {{messages.error_msg}}
+            </div>
+        {{/if}}
+
+        {{#if messages.success_msg}}
+            <div class="message success">
+                {{messages.success_msg}}
+            </div>
+        {{/if}}
+
         {{{body}}}
     </div>
     <footer>

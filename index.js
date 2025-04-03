@@ -35,7 +35,7 @@ app.use(
         }),
         cookie: {
             secure: false,
-            maxAge: 360000,
+            maxAge: 3600000,
             expires: new Date(Date.now() + 360000),
             httpOnly: true
         }
@@ -44,6 +44,11 @@ app.use(
 
 // Flash messages
 app.use(flash())
+
+app.use((req, res, next) => {
+    res.locals.messages = req.flash() 
+    next()
+})
 
 // Public Path
 app.use(express.static('public'))

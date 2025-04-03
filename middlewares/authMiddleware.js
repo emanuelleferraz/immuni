@@ -6,8 +6,12 @@ module.exports = {
     if (req.session.userId) {  
       return next();
     }
-    req.flash('message', 'Por favor, faça login para acessar esta página');
-    res.redirect('/login');
+    req.flash('error_msg', 'Por favor, faça login para acessar esta página!');
+    return res.render('auth/login', { 
+      title: 'Login',
+      layout: 'main',
+      messages: req.flash() 
+    });
   },
 
   checkNotAuthenticated: (req, res, next) => {
@@ -21,51 +25,104 @@ module.exports = {
     const { email, password } = req.body;
     
     if (!email || !password) {
-      req.flash('message', 'Por favor, preencha todos os campos');
-      return res.redirect('/login');
+      req.flash('error_msg', 'Por favor, preencha todos os campos!');
+      return res.render('auth/login', {
+        title: 'Login',
+        layout: 'main',
+        messages: req.flash(),
+        values: req.body // Mantém os valores preenchidos
+      });
     }
 
     try {
       const user = await User.findOne({ where: { email } });
       
       if (!user) {
-        req.flash('message', 'Usuário não encontrado');
-        return res.redirect('/login');
+        req.flash('error_msg', 'Usuário não encontrado!');
+        return res.render('auth/login', {
+          title: 'Login',
+          layout: 'main',
+          messages: req.flash(),
+          values: req.body
+        });
       }
 
       if (!bcrypt.compareSync(password, user.password)) {
-        req.flash('message', 'Senha incorreta');
-        return res.redirect('/login');
+        req.flash('error_msg', 'Senha incorreta!');
+        return res.render('auth/login', {
+          title: 'Login',
+          layout: 'main',
+          messages: req.flash(),
+          values: req.body
+        });
       }
 
       req.user = user;
       next();
     } catch (error) {
       console.error('Middleware auth error:', error);
-      req.flash('message', 'Erro no servidor');
-      res.redirect('/login');
+      req.flash('error_msg', 'Erro no servidor');
+      res.render('auth/login', {
+        title: 'Login',
+        layout: 'main',
+        messages: req.flash()
+      });
     }
   },
 
   validateRegister: async (req, res, next) => {
-    const { name, email, password, confirmpassword } = req.body;
+    const { name, email, password, confirmpassword, data_nascimento } = req.body;
     
+    if (!name || !email || !password || !confirmpassword) {
+      req.flash('error_msg', 'Todos os campos são obrigatórios!');
+      return res.render('auth/register', {
+        title: 'Cadastro',
+        layout: 'main',
+        messages: req.flash(),
+        values: req.body
+      });
+    }
+
     if (password !== confirmpassword) {
-      req.flash('message', 'As senhas não conferem');
-      return res.redirect('/register');
+      req.flash('error_msg', 'As senhas não conferem!');
+      return res.render('auth/register', {
+        title: 'Cadastro',
+        layout: 'main',
+        messages: req.flash(),
+        values: req.body
+      });
+    }
+
+    if (password.length < 6) {
+      req.flash('error_msg', 'A senha deve ter pelo menos 6 caracteres!');
+      return res.render('auth/register', {
+        title: 'Cadastro',
+        layout: 'main',
+        messages: req.flash(),
+        values: req.body
+      });
     }
 
     try {
       const userExists = await User.findOne({ where: { email } });
       if (userExists) {
-        req.flash('message', 'Email já cadastrado');
-        return res.redirect('/register');
+        req.flash('error_msg', 'Email já cadastrado!');
+        return res.render('auth/register', {
+          title: 'Cadastro',
+          layout: 'main',
+          messages: req.flash(),
+          values: req.body
+        });
       }
       next();
     } catch (error) {
       console.error('Middleware register error:', error);
-      req.flash('message', 'Erro no servidor');
-      res.redirect('/register');
+      req.flash('error_msg', 'Erro no servidor');
+      res.render('auth/register', {
+        title: 'Cadastro',
+        layout: 'main',
+        messages: req.flash()
+      });
     }
   }
 };

@@ -1,0 +1,28 @@
+<div class="auth-container">
+    <h1>Cadastre-se!</h1>
+    <p>Faça parte do Immuni.</p>
+    <form action="/register" method="POST">
+        <div class="form-control">
+            <label for="name"></label>
+            <input type="text" name="name" placeholder="Nome completo" required>
+        </div>
+        <div class="form-control">
+            <label for="data_nascimento"></label>
+            <input type="date" name="data_nascimento" placeholder="Data de Nascimento">
+        </div>
+        <div class="form-control">
+            <label for="email"></label>
+            <input type="email" name="email" placeholder="Insira seu e-mail" required>
+        </div>
+        <div class="form-control">
+            <label for="password"></label>
+            <input type="password" name="password" placeholder="Senha" required>
+        </div>
+        <div class="form-control">
+            <label for="confirmPassword"></label>
+            <input type="password" name="confirmpassword" placeholder="Confirme sua senha" required> 
+        </div>
+        <input class="btn" type="submit" value="Cadastrar">
+        <p>Já possui uma conta? <a href="/login">Clique aqui!</a></p>
+    </form>
+</div>

@@ -31,7 +31,7 @@ class DashboardController {
         user,
         records: user.RecordVaccines,
         progress,
-        layout: 'layouts/main'
+        layout: 'main'
       });
 
     } catch (error) {
