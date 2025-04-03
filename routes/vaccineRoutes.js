@@ -3,7 +3,7 @@ const router = express.Router();
 const VaccineController = require('../controllers/vaccineController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/vacinas', authMiddleware.checkAuthenticated, VaccineController.listAll);
-router.get('/vacinas/:id', authMiddleware.checkAuthenticated, VaccineController.showDetails);
+router.get('/vacinas', VaccineController.listAll);
+// router.get('/vacinas/:id', authMiddleware.checkAuthenticated, VaccineController.showDetails);
 
 module.exports = router;

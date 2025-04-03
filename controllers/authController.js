@@ -13,7 +13,6 @@ module.exports = class AuthController {
     const { email, password } = req.body;
 
     try {
-        // Busca o usuário no banco
         const user = await User.findOne({ where: { email } });
         
         if (!user) {
@@ -22,7 +21,7 @@ module.exports = class AuthController {
                 title: 'Login',
                 layout: 'main',
                 messages: req.flash(),
-                values: { email } 
+                values: { email }
             });
         }
 
@@ -38,20 +37,31 @@ module.exports = class AuthController {
             });
         }
 
-        req.session.userId = user.id;
-        req.session.save(err => {
+        // Cria a sessão de forma segura
+        req.session.regenerate(err => {
             if (err) {
-                console.error('Erro ao salvar sessão:', err);
-                req.flash('error_msg', 'Erro durante o login');
+                console.error('Erro ao regenerar sessão:', err);
                 return res.render('auth/login', {
                     title: 'Login',
                     layout: 'main',
-                    messages: req.flash()
+                    messages: { error_msg: 'Erro durante o login' }
                 });
             }
-            
-            req.flash('success_msg', 'Login realizado com sucesso!');
-            return res.redirect('/dashboard');
+
+            req.session.userId = user.id;
+            req.session.save(err => {
+                if (err) {
+                    console.error('Erro ao salvar sessão:', err);
+                    return res.render('auth/login', {
+                        title: 'Login',
+                        layout: 'main',
+                        messages: { error_msg: 'Erro durante o login' }
+                    });
+                }
+                
+                req.flash('success_msg', 'Login realizado com sucesso!');
+                return res.redirect('/dashboard');
+            });
         });
 
     } catch (error) {
@@ -63,7 +73,7 @@ module.exports = class AuthController {
             messages: req.flash()
         });
     }
-  }
+}
 
   static register(req, res) {
     res.render('auth/register', {

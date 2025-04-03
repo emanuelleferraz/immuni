@@ -30,7 +30,7 @@ module.exports = {
         title: 'Login',
         layout: 'main',
         messages: req.flash(),
-        values: req.body // Mantém os valores preenchidos
+        values: req.body 
       });
     }
 

@@ -1,0 +1,30 @@
+<div class="auth-container">
+    <h1>Foi vacinado? Registre a vacinação!</h1>
+    <p>Informe os detalhes</p>
+    <form action="/registrar-vacina" method="POST">
+        <!-- Campo de seleção de vacina -->
+        <div class="form-control">
+            <label for="vacina_id"></label>
+            <select name="vacina_id" id="vacina_id" required>
+                <option value="">Selecione uma vacina</option>
+                {{#each vaccines}}
+                    <option value="{{this.id}}">{{this.nome}}</option>
+                {{/each}}
+            </select>
+        </div>
+        
+        <!-- Campo de data de aplicação -->
+        <div class="form-control">
+            <label for="data_aplicacao"></label>
+            <input type="date" name="data_aplicacao" id="data_aplicacao" placeholder="Data da aplicação" required>
+        </div>
+        
+        <!-- Campo de dose -->
+        <div class="form-control">
+            <label for="dose"></label>
+            <input type="number" name="dose" id="dose" min="1" placeholder="Número da dose (1, 2, etc.)" required>
+        </div>
+        
+        <input class="btn" type="submit" value="Registrar">
+    </form>
+</div>

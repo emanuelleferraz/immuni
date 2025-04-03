@@ -1,0 +1,57 @@
+<div class="vaccine-container">
+  <h2 class="vaccine-title">
+    <i class="fas fa-syringe"></i> Lista de Vacinas
+  </h2>
+
+  {{#if messages.message}}
+  <div class="vaccine-alert">
+    {{{messages.message}}}
+  </div>
+  {{/if}}
+
+  <div class="vaccine-table-container">
+    <table class="vaccine-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Vacina</th>
+          <th>Descrição</th>
+          <th class="text-center">Idade Recomendada</th>
+          <th class="text-center">Doses</th>
+          <th class="text-center">Obrigatória</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each vaccines}}
+        <tr>
+          <td>{{increment @index}}</td>
+          <td class="vaccine-name">{{nome}}</td>
+          <td class="vaccine-description">{{descricao}}</td>
+          <td class="text-center">
+            <span class="age-badge">
+              {{idade_recomendada}} {{#if (lt idade_recomendada 12)}}meses{{else}}anos{{/if}}
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="dose-badge">{{dose_padrao}}</span>
+          </td>
+          <td class="text-center">
+            {{#if is_obrigatoria}}
+            <span class="status-icon success">✓</span>
+            {{else}}
+            <span class="status-icon">✗</span>
+            {{/if}}
+          </td>
+        </tr>
+        {{else}}
+        <tr>
+          <td colspan="6" class="empty-message">
+            <i class="fas fa-virus-slash"></i>
+            <p>Nenhuma vacina cadastrada</p>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

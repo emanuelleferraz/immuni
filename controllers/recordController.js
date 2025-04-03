@@ -4,14 +4,22 @@ const Vaccine = require('../models/Vaccine')
 module.exports = class RecordController {
   static async createForm(req, res) {
     try {
-      const vaccines = await Vaccine.findAll();
-      res.render('records/create', { vaccines });
+      const vaccines = await Vaccine.findAll({
+        attributes: ['id', 'nome'], 
+        order: [['nome', 'ASC']]    
+      });
+      
+      res.render('records/create', { 
+        vaccines,
+        pageTitle: 'Registrar Vacinação' 
+      });
+      
     } catch (error) {
       console.error('Record form error:', error);
       req.flash('message', 'Erro ao carregar formulário');
       res.redirect('/dashboard');
     }
-  }
+}
 
   static async create(req, res) {
     try {

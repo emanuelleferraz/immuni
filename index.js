@@ -9,9 +9,28 @@ const path = require('path')
 // Iniciando o express
 const app = express()
 
+// Configuração do Handlebars com helpers
+const hbs = engine({
+    helpers: {
+      lt: (a, b) => a < b,
+      add: (a, b) => a + b,
+      eq: (a, b) => a === b,
+      json: (obj) => JSON.stringify(obj),
+      // helper increment
+      increment: (value) => parseInt(value) + 1
+    },
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true
+    },
+    defaultLayout: 'main',
+    extname: '.handlebars'
+  });
+
 // Template Engine 
-app.engine('handlebars', engine()) 
+app.engine('handlebars', hbs) 
 app.set('view engine', 'handlebars')
+app.set('views', path.join(__dirname, 'views'))
 
 // Response do body
 app.use(
@@ -91,7 +110,7 @@ app.get('/', (req, res) => {
       title: 'Immuni - Página Inicial',
       layout: 'main' 
     });
-  })
+})
 
 // Rota para páginas não encontradas (404)
 app.use((req, res) => {
