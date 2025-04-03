@@ -1,4 +1,5 @@
-const { RecordVaccine, Vaccine } = require('../models');
+const RecordVaccine = require('../models/RecordVaccine')
+const Vaccine = require('../models/Vaccine')
 
 module.exports = class RecordController {
   static async createForm(req, res) {

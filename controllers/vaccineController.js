@@ -1,4 +1,4 @@
-const { Vaccine } = require('../models');
+const Vaccine = require('../models/Vaccine')
 
 module.exports = class VaccineController {
   static async listAll(req, res) {

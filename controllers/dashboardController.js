@@ -1,4 +1,6 @@
-const { User, RecordVaccine, Vaccine } = require('../models');
+const User = require('../models/User')
+const Vaccine = require('../models/Vaccine')
+const RecordVaccine = require('../models/RecordVaccine')
 
 module.exports = class DashboardController {
   static async showDashboard(req, res) {
