@@ -1,9 +1,9 @@
-const User  = require('../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
   checkAuthenticated: (req, res, next) => {
-    if (req.session.userid) {
+    if (req.session.userId) {  
       return next();
     }
     req.flash('message', 'Por favor, faça login para acessar esta página');
@@ -11,7 +11,7 @@ module.exports = {
   },
 
   checkNotAuthenticated: (req, res, next) => {
-    if (!req.session.userid) {
+    if (!req.session.userId) {  
       return next();
     }
     res.redirect('/dashboard');
@@ -68,4 +68,4 @@ module.exports = {
       res.redirect('/register');
     }
   }
-}
+};

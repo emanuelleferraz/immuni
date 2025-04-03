@@ -4,74 +4,94 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 module.exports = class AuthController {
   static login(req, res) {
-    res.render('auth/login');
+    res.render('auth/login', {
+      title: 'Login',
+      layout: 'layouts/main'
+    });
   }
 
   static async loginPost(req, res) {
+    const { email, password } = req.body;
+
     try {
-      const { email, password } = req.body;
+      // Verifica se o usuário existe
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
-        req.flash('message', 'Usuário não encontrado');
-        return res.render('auth/login');
+        req.flash('error_msg', 'Usuário não encontrado!');
+        return res.redirect('/login');
       }
 
-      if (!bcrypt.compareSync(password, user.password)) {
-        req.flash('message', 'Senha incorreta');
-        return res.render('auth/login');
+      // Verifica a senha
+      const passwordMatch = bcrypt.compareSync(password, user.password);
+
+      if (!passwordMatch) {
+        req.flash('error_msg', 'Senha inválida!');
+        return res.redirect('/login');
       }
 
-      req.session.userid = user.id;
-      req.flash('message', 'Login realizado com sucesso!');
+      // Autentica o usuário e redireciona para a Dashboard
+      req.session.userId = user.id;
+      req.flash('success_msg', 'Login realizado com sucesso!');
+      return res.redirect('/dashboard');
 
-      req.session.save(() => {
-        res.redirect('/dashboard');
-      });
     } catch (error) {
-      console.error('Login error:', error);
-      req.flash('message', 'Erro no servidor');
-      res.redirect('/login');
+      console.error('Erro no login:', error);
+      req.flash('error_msg', 'Erro no servidor!');
+      return res.redirect('/login');
     }
   }
 
   static register(req, res) {
-    res.render('auth/register');
+    res.render('auth/register', {
+      title: 'Cadastro',
+      layout: 'layouts/main'
+    });
   }
 
   static async registerPost(req, res) {
     const { name, email, password, confirmpassword } = req.body;
 
-    if (password !== confirmpassword) {
-      req.flash('message', 'As senhas não conferem');
-      return res.render('auth/register');
-    }
-
     try {
+      // Validação de senha
+      if (password !== confirmpassword) {
+        req.flash('error_msg', 'As senhas não conferem!');
+        return res.redirect('/register');
+      }
+
+      // Verifica se o e-mail já existe
+      const checkIfUserExists = await User.findOne({ where: { email } });
+
+      if (checkIfUserExists) {
+        req.flash('error_msg', 'O e-mail já está em uso!');
+        return res.redirect('/register');
+      }
+
+      // Criptografa a senha
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
 
+      // Cria o usuário
       const user = await User.create({
         name,
         email,
         password: hashedPassword
       });
 
-      req.session.userid = user.id;
-      req.flash('message', 'Cadastro realizado com sucesso!');
+      // Autentica e redireciona para a Dashboard
+      req.session.userId = user.id;
+      req.flash('success_msg', 'Cadastro realizado com sucesso!');
+      return res.redirect('/dashboard');
 
-      req.session.save(() => {
-        res.redirect('/dashboard');
-      });
     } catch (error) {
-      console.error('Register error:', error);
-      req.flash('message', 'Erro ao cadastrar usuário');
-      res.redirect('/register');
+      console.error('Erro no cadastro:', error);
+      req.flash('error_msg', 'Erro ao cadastrar usuário!');
+      return res.redirect('/register');
     }
   }
 
   static logout(req, res) {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/');
   }
 }

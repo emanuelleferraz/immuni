@@ -77,13 +77,16 @@ app.use(dashboardRoutes)
 app.use(recordRoutes)
 app.use(vaccineRoutes)
 
-// Rota raiz redireciona para login ou dashboard
+// Rota raiz redireciona para home ou dashboard
 app.get('/', (req, res) => {
     if (req.session.userId) {
-        return res.redirect('/dashboard')
+      return res.redirect('/dashboard');
     }
-    res.redirect('/login')
-})
+    res.render('home', { 
+      title: 'Immuni - Página Inicial',
+      layout: 'main' 
+    });
+  })
 
 // Rota para páginas não encontradas (404)
 app.use((req, res) => {
