@@ -31,10 +31,14 @@ Protótipos para as páginas foram elaborados e podem ser encontrados em:
 - **Dashboard**: com informações das vacinas tomadas pelo usuário;
 - **Página de Registro do Usuário**: formulário para cadastro de novos usuários;  
 - **Página de Listagem de Vacinas**: tabela informando as vacinas a serem tomadas.
+- **Página de Registro de Vacinas**: formulário para cadastro de vacinação.
 
 Você pode encontrar os protótipos de tela na pasta [Protótipos](./Protótipos/) dentro do diretório de assets.
 
-## 5. Referências  
+## 5. Resultados
+O sistema desenvolvido permitiu aos usuários gerenciar de forma eficiente suas vacinas, oferecendo uma interface intuitiva e completa. Através do painel de controle, foi possível visualizar informações pessoais, acompanhar a lista de vacinas já tomadas com opções de edição e exclusão, além de consultar a porcentagem de vacinação concluída. Um gráfico dinâmico destacou visualmente a quantidade de vacinas administradas em comparação com as pendentes, e uma tabela adicional apresentou claramente as vacinas ainda não tomadas. O projeto foi construído com Node.js, Express.js, Sequelize e MySQL, seguindo a arquitetura MVC, o que garantiu uma melhor organização do código e separação de responsabilidades entre as camadas do sistema. Com isso, a aplicação entregou uma solução funcional, escalável e acessível para o controle individual de imunizações.
+
+## 6. Referências  
 BRASIL. **Cartilha Vacinas**. Ministério da Saúde. Disponível em: <https://meususdigital.saude.gov.br/publico/cartilha-vacinas>. Acesso em: 26 jan. 2025.
 
 
