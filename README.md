@@ -30,9 +30,34 @@ Este trabalho propõe o desenvolvimento de um sistema web que funcionará como u
 
 O projeto Immuni foi desenvolvido utilizando uma arquitetura MVC (Model-View-Controller) com Node.js como ambiente de execução, Express.js como framework web e Sequelize como ORM (Object-Relational Mapping) para conexão com o banco de dados MySQL. Essa estrutura organiza o sistema em camadas bem definidas, cada uma com responsabilidades específicas, promovendo separação de conceitos e facilitando a manutenção do código.
 
+# Funcionalidades Implementadas
+
+### 📊 Dashboard Interativa
+- Visualização do progresso de vacinação
+- Exibição de vacinas tomadas e pendentes
+- Comparativo entre vacinas tomadas vs. pendentes
+- Porcentagem do total de vacinas já administradas
+
+### 📝 Registro de Vacinas
+- Formulário de cadastro de vacinação
+- Captura de dados da aplicação (data, vacina, dose)
+
+### 📋 Lista de Vacinas
+Catálogo completo com:
+- Nome da vacina
+- Descrição detalhada
+- Periodicidade necessária
+- Idade ideal para aplicação
+- Indicador de obrigatoriedade
+
+### 🔐 Autenticação de Usuários
+- Sistema de Login
+- Fluxo de Cadastro de novos usuários
+- Gerenciamento de sessão
+
 # 🚀 Executando o Immuni
 
-## ⚙️ Instalação das Dependências
+## ⚙️ Instalação das Dependências e Execução
 
 Execute os seguintes comandos em sequência no terminal:
 
@@ -58,3 +83,9 @@ mkdir -p models/ controllers/ views/ routes/ config/ public/
 # Executando
 
 npm start
+```
+# Referências
+
+- BRASIL. **Cartilha Vacinas**. Ministério da Saúde. Disponível em: <https://meususdigital.saude.gov.br/publico/cartilha-vacinas>. 
+
+- **Express.js Documentation**. Disponível em: <https://expressjs.com/> 
